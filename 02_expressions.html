@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>表达式</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<div data-ng-app="myApp">
+    <p>第一个表达式 : {{ 5 + 5 }} </p>
+
+    <div data-ng-init="quantity=30;cost=5">
+        <p>总价{{quantity*cost}}</p>
+        <p>总价<span data-ng-bind="quantity*cost"></span></p>
+    </div>
+
+    <div data-ng-init="firstName='John';lastName='Doe'">
+        <p>姓名： {{ firstName + " " + lastName }}</p>
+    </div>
+
+    <h4>angular对象</h4>
+    <div data-ng-init="person={firstName:'张',lastName:'三丰'}">
+        <p><span>{{person.firstName}}</span> + <span>{{person.lastName}}</span></p>
+    </div>
+
+    <h4>angular数组</h4>
+    <div data-ng-init="points=[1,3,4,3222,2]">
+        <p><span data-ng-bind="points[3]"></span></p>
+    </div>
+</div>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+</body>
+</html>

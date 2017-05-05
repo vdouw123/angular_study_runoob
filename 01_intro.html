@@ -6,7 +6,8 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <script src="angular.min.js"></script>
 </head>
 <body>
@@ -28,14 +29,14 @@
         <p>名：<input type="text" ng-model="lastName"/></p>
         <p>你输入的姓名是：{{firstName + " | " + lastName}}</p>
     </div>
-    <script>
-        var app = angular.module('myApp', []);
-        app.controller('myCtrl', function ($scope) {
-            $scope.firstName = '张';
-            $scope.lastName = '三丰';
-        });
-    </script>
 </div>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.firstName = '张';
+        $scope.lastName = '三丰';
+    });
+</script>
 
 </body>
 </html>
