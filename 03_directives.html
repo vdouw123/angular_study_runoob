@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>指令</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<div data-ng-app="myApp">
+    <p>angular指令是扩展的HTML属性，带有前缀ng-。</p>
+    <div data-ng-controller="myCtrl">
+        <p>名字： <input type="text" data-ng-model="name"/></p>
+        <h3>Hello,{{name}}</h3>
+    </div>
+
+    <h4>重复HTML元素</h4>
+    <div data-ng-init="names=['张','三','丰']">
+        <ul>
+            <li data-ng-repeat="x in names" data-ng-bind="x"></li>
+        </ul>
+    </div>
+
+    <div ng-init="names2=[{name:'Jani',country:'Norway'},{name:'Hege',country:'Sweden'},{name:'Kai',country:'Denmark'}]">
+        <ul>
+            <li ng-repeat="x in names2">
+                {{ x.name + ', ' + x.country }}
+            </li>
+        </ul>
+    </div>
+
+    <h4>创建自定义指令</h4>
+    <directive1></directive1>
+    <div directive1="true"></div>
+    <div class="directive-1"></div>
+
+</div>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.name = '123';
+    });
+
+    //创建自定义指令
+    app.directive('directive1', function () {
+        return {
+            restrict: 'EA',  //默认
+            // E = element
+            // A = attribute
+            // C = clss
+            // M = comment
+            template: '<h3>自定义指令</h3>'
+        };
+    });
+
+</script>
+</body>
+</html>
