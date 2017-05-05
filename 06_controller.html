@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>控制器 Controller</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <p>ng-controller指令定义了应用程序的控制器。</p>
+    <p>控制器是JS对象，由标准的JS对象的构造函数创建。</p>
+    <p>angular使用$scope对象来调用控制器。</p>
+    <p>控制器$scope相当于作用域和控制范围，用来保存Model的对象。</p>
+
+    <h4>控制器ng-controller的方法</h4>
+    <div data-ng-controller="personCtrl">
+        <p>xin : <input type="text" data-ng-model="firstName"/></p>
+        <p>ming : <input type="text" data-ng-model="lastName"/></p>
+        <p>{{fullName()}}</p>
+    </div>
+    <script>
+        app.controller('personCtrl', function ($scope) {
+            $scope.firstName = '张';
+            $scope.lastName = '三丰';
+            $scope.fullName = function () {
+                return $scope.firstName + "" + $scope.lastName;
+            }
+        })
+    </script>
+
+    <p>在大型应用程序中，通常把控制器存储在外部文件中。</p>
+
+</div>
+
+
+</body>
+</html>
