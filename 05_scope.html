@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>作用域scope</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <p>scope（作用域）作用域是应用在HTML（视图）和JS（控制器）之间的纽带。</p>
+    <p>scope是一个对象，有可用的方法和属性。</p>
+    <p>scope可用在视图和控制器上。</p>
+    <p>当你在angular创建控制器时，可以将$scope对象当作一个参数传递。</p>
+
+    <div data-ng-controller="myCtrl1">
+        <span>{{carname}}</span>
+    </div>
+    <script>
+        app.controller('myCtrl1', function ($scope) {
+            $scope.carname = 'Volvo';
+        })
+    </script>
+    <p>当在控制器中添加$scope对象时，视图HTML可以获取了这些属性。</p>
+
+    <h4>Angular的MVC：</h4>
+    <p>视图 - View : HTML</p>
+    <p>模型 - Model : 当前视图中可用的数据</p>
+    <p>控制器 - Controller : 即JS函数，可以添加或修改属性</p>
+
+    <div data-ng-controller="myCtrl2">
+        <input type="text" data-ng-model="name">
+        <p>{{greeting}}</p>
+        <button data-ng-click="sayHello()">点我</button>
+    </div>
+    <script>
+        app.controller('myCtrl2', function ($scope) {
+            $scope.name = '张三丰';
+            $scope.sayHello = function () {
+                $scope.greeting = 'Hello ' + $scope.name + '!!';
+            }
+        })
+    </script>
+    <p>可以看出，修改了视图View层，模型Model和控制器Controller都会更新。</p>
+
+    <h4>Scope作用范围</h4>
+    <div data-ng-controller="myCtrl3">
+        <ul>
+            <li data-ng-repeat="x in names">{{x}}</li>
+        </ul>
+    </div>
+    <script>
+        app.controller('myCtrl3', function ($scope) {
+            $scope.names = ['Emil', 'Tobias', 'Linus'];
+        })
+    </script>
+    <p>每个LI可以访问当前的重复对象，使用变量X表示。</p>
+
+    <h4>根作用域$rootScope</h4>
+    <div data-ng-controller="myCtrl4">
+        <p><b>{{xin}}</b>氏家族成员：</p>
+        <ul>
+            <li data-ng-repeat="x in mings">{{xin}}{{x}}</li>
+        </ul>
+    </div>
+    <script>
+        app.controller('myCtrl4', function ($scope) {
+            $scope.mings = ['三丰', '翠山', '无忌'];
+            // $rootScope.xin = '张';
+        })
+    </script>
+
+</div>
+
+
+</body>
+</html>
