@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>Title</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp">
+    <div ng-init="firstName='John'">
+        <p>名字： <input type="text" ng-model="name"/></p>
+        <h3>Hello,{{name}}</h3>
+        <p><span ng-bind="firstName"></span></p>
+    </div>
+    <p>ng-app 指令告诉 AngularJS，元素是 AngularJS 应用程序 的"所有者"。</p>
+    <p>ng-model 指令把输入域的值绑定到应用程序变量 name。</p>
+    <p>ng-bind 指令把应用程序变量 name 绑定到某个段落的 innerHTML。</p>
+
+    <hr>
+
+    <h4>Angular应用</h4>
+    <div ng-controller="myCtrl">
+        <p>姓：<input type="text" ng-model="firstName"/></p>
+        <p>名：<input type="text" ng-model="lastName"/></p>
+        <p>你输入的姓名是：{{firstName + " | " + lastName}}</p>
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.firstName = '张';
+            $scope.lastName = '三丰';
+        });
+    </script>
+</div>
+
+</body>
+</html>
