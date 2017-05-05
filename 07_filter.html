@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>过滤器</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <h4>表达式中添加过滤器</h4>
+    <div data-ng-controller="personCtrl">
+        <p>ming : <input type="text" data-ng-model="lastName"/></p>
+        <p>姓名为 {{lastName | uppercase}}</p>
+    </div>
+    <script>
+        app.controller('personCtrl', function ($scope) {
+            $scope.lastName = 'sanfeng';
+        })
+    </script>
+
+    <p>currency 格式化数字为货币格式。</p>
+    <p>filter 从数组项中选择一个子集。</p>
+    <p>lowercase 格式化字符串为小写。</p>
+    <p>orderBy 根据某个表达式排列数组。</p>
+    <p>uppercase 格式化字符串为大写。</p>
+
+    <div data-ng-controller="costCtrl">
+        <input type="number" data-ng-model="quantity"/>
+        <input type="number" data-ng-model="price"/>
+        <p>总价 : {{quantity * price | currency}}</p>
+    </div>
+    <script>
+        app.controller('costCtrl', function ($scope) {
+            $scope.quantity = 23;
+            $scope.price = 8.4544;
+        });
+    </script>
+
+    <h4>向指令中添加过滤器</h4>
+    <div data-ng-controller="nameCtrl">
+        <ul>
+            <li data-ng-repeat="x in names | orderBy:'country'">
+                <span>{{x.name + ' | ' + x.country}}</span>
+            </li>
+        </ul>
+    </div>
+    <script>
+        app.controller('nameCtrl', function ($scope) {
+            $scope.names = [
+                {name: 'Jani', country: 'Norway'},
+                {name: 'Hege', country: 'Sweden'},
+                {name: 'Kai', country: 'Denmark'}
+            ]
+        })
+    </script>
+
+    <h4>输入过滤</h4>
+    <div data-ng-controller="nameCtrl2">
+        <p><input type="text" data-ng-model="test"/></p>
+        <ul>
+            <li data-ng-repeat="x in names | filter:test | orderBy:'country'">
+                <span>{{(x.name | uppercase) + ' | ' + x.country}}</span>
+            </li>
+        </ul>
+    </div>
+    <script>
+        app.controller('nameCtrl2', function ($scope) {
+            $scope.names = [
+                {name: 'Jani', country: 'Norway'},
+                {name: 'Hege', country: 'Sweden'},
+                {name: 'Kai', country: 'Denmark'}
+            ]
+        })
+    </script>
+
+    <h4>自定义过滤器</h4>
+    <div data-ng-controller="myCtrl3">
+        <input type="text" data-ng-model="msg"/>
+        <p>姓名：{{msg | reverse}}</p>
+    </div>
+    <script>
+        app.controller('myCtrl3', function ($scope) {
+            $scope.msg = 'Runoob';
+        });
+        app.filter('reverse', function () {
+            return function (text) {
+                return text.split('').reverse().join('');
+            };
+        });
+    </script>
+
+
+</div>
+
+
+</body>
+</html>
