@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>ng-model 指令</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<div data-ng-app="myApp">
+    <p>ng-model指令用于绑定应用程序数据到控制器（input,select,textarea）的值。</p>
+    <div data-ng-controller="myCtrl">
+        <input type="text" data-ng-model="name">
+        <p>您输入了{{name}}</p>
+    </div>
+
+    <h4>验证用户输入</h4>
+    <form name="myForm1">
+        <p>
+            <span>Email:</span>
+            <input type="email" name="myAddress" data-ng-model="text"/>
+            <span data-ng-show="myForm1.myAddress.$error.email">不是一个合法的邮箱地址</span>
+        </p>
+    </form>
+
+    <form name="myForm3">
+        <input name="myAddress3" data-ng-model="text"/>
+    </form>
+    <style>
+        input.ng-invalid {
+            border: 1px solid red;
+        }
+
+        input.ng-touched {
+            height: 100px;
+        }
+    </style>
+
+    <p>指令ng-model根据表单域的状态添加/移除以下类：</p>
+    <p>ng-empty</p>
+    <p>ng-not-empty</p>
+    <p>ng-touched</p>
+    <p>ng-untouched</p>
+    <p>ng-valid</p>
+    <p>ng-invalid</p>
+    <p>ng-dirty</p>
+    <p>ng-pending</p>
+    <p>ng-pristine</p>
+
+
+</div>
+
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.name = '初始值';
+    });
+
+
+</script>
+</body>
+</html>
