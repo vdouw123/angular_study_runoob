@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>select</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <div data-ng-controller="myCtrl1">
+        <h4>ng-options</h4>
+        <select data-ng-init="selectName=names[0]" data-ng-model="selectName"
+                data-ng-options="x for x in names"></select>
+        <h4>no-repeat</h4>
+        <select>
+            <option data-ng-repeat="x in names" value="{{x}}">{{x}}</option>
+        </select>
+    </div>
+    <script>
+        app.controller('myCtrl1', function ($scope) {
+            $scope.names = ['赵', '钱', '孙', '李'];
+        });
+    </script>
+
+    <h4>数据源为对象</h4>
+    <div data-ng-controller="myCtrl2">
+        <select data-ng-model="selectSite" data-ng-options="x for (x,y) in sites"></select>
+        <br>
+        <select>
+            <option data-ng-repeat="x in sites">{{x}}</option>
+        </select>
+    </div>
+    <script>
+        app.controller('myCtrl2', function ($scope) {
+            $scope.sites = {
+                site1: 'google',
+                site2: 'baidu',
+                site3: 'qq'
+            };
+        });
+    </script>
+
+    <h4>对象的循环</h4>
+    <div data-ng-controller="myCtrl3">
+        <select data-ng-model="selectdCar" data-ng-options="x for (x,y) in cars" data-ng-init="selectdCar[0]['brand']">
+        </select>
+        <p>你选择的是: {{selectdCar.brand}}</p>
+        <p>模型: {{selectdCar.model}}</p>
+        <p>颜色: {{selectdCar.color}}</p>
+
+    </div>
+    <script>
+        app.controller('myCtrl3', function ($scope) {
+            $scope.cars = {
+                car01: {brand: "Ford", model: "Mustang", color: "red"},
+                car02: {brand: "Fiat", model: "500", color: "white"},
+                car03: {brand: "Volvo", model: "XC90", color: "black"}
+            }
+        })
+    </script>
+    <p>没有初始数据，待处理。</p>
+
+    <h4>数组的循环</h4>
+    <div data-ng-controller="myCtrl4">
+        <select>
+            <option data-ng-repeat="x in cars">{{x.brand}}</option>
+        </select>
+        <p>你选择的是: {{selectdCar.brand}}</p>
+        <p>模型: {{selectdCar.model}}</p>
+        <p>颜色: {{selectdCar.color}}</p>
+    </div>
+    <script>
+        app.controller('myCtrl4', function ($scope) {
+            $scope.cars = [
+                {brand: "Ford", model: "Mustang", color: "red"},
+                {brand: "Fiat", model: "500", color: "white"},
+                {brand: "Volvo", model: "XC90", color: "black"}
+            ]
+        });
+    </script>
+    <p>有点问题，待解决。</p>
+
+</div>
+
+
+</body>
+</html>
