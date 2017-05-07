@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>表单forms</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <div data-ng-controller="formCtrl">
+        <form>
+            <p>
+                <span>First name : </span>
+                <input type="text" data-ng-model="user.firstName"/>
+            </p>
+            <p>
+                <span>Last name : </span>
+                <input type="text" data-ng-model="user.lastName"/>
+            </p>
+            <p><button data-ng-click="reset()">reset</button></p>
+            <p>{{user}}</p>
+            <p>{{master}}</p>
+        </form>
+    </div>
+    <script>
+        app.controller('formCtrl', function ($scope) {
+            $scope.master = {firstName: '张', lastName: '三丰'};
+            $scope.reset = function () {
+                $scope.user = angular.copy($scope.master);
+            };
+            $scope.reset();
+        });
+    </script>
+
+</div>
+
+</body>
+</html>
