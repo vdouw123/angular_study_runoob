@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>events</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <h4>ng-click指令</h4>
+    <div data-ng-controller="myCtrl1">
+        <button data-ng-click="count=count+1">点我加1</button>
+        <p>{{count}}</p>
+    </div>
+    <script>
+        app.controller('myCtrl1', function ($scope) {
+            $scope.count = 1999;
+        });
+    </script>
+
+    <h4>调用自定义事件</h4>
+    <div data-ng-controller="myCtrl2">
+        <button data-ng-click="toggle()">显示或隐藏</button>
+        <p ng-hide="myVar">
+            名: <input type=text ng-model="firstName"><br>
+            姓: <input type=text ng-model="lastName"><br><br>
+            姓名: {{firstName + " " + lastName}}
+        </p>
+    </div>
+    <script>
+        app.controller('myCtrl2', function ($scope) {
+            $scope.firstName = '张';
+            $scope.lastName = '三丰';
+            $scope.myVal = false;
+            $scope.toggle = function () {
+                $scope.myVar = !$scope.myVar;
+            }
+        })
+    </script>
+
+
+</div>
+
+</body>
+</html>
