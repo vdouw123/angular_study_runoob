@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>select</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <div data-ng-controller="customersCtrl">
+        <table>
+            <tr data-ng-repeat="x in names">
+                <td>{{x.Name}}</td>
+                <td>{{x.Country}}</td>
+            </tr>
+        </table>
+
+        <h4>表格加序号</h4>
+        <table>
+            <tr data-ng-repeat="x in names">
+                <td>{{$index+1}}</td>
+                <td>{{x.Name}}</td>
+                <td>{{x.Country}}</td>
+            </tr>
+        </table>
+
+        <h4>使用$even和$odd</h4>
+        <table>
+            <tr data-ng-repeat="x in names">
+                <td data-ng-if="$odd" style="background:red;">{{x.Name}}</td>
+                <td data-ng-if="$even">{{x.Name}}</td>
+                <td data-ng-if="$odd" style="background:red;">{{x.Country}}</td>
+                <td data-ng-if="$even">{{x.Country}}</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        app.controller('customersCtrl', function ($scope, $http) {
+            $http.get("11_data.php").then(function (result) {
+                $scope.names = result.data.records;
+            })
+        })
+    </script>
+    <style>
+        body {
+            padding: 50px;
+        }
+
+        table {
+            border-top: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+        }
+
+        table td {
+            border-bottom: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            padding: 5px 10px;
+        }
+    </style>
+
+</div>
+
+
+</body>
+</html>
