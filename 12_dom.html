@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>HTML dom</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <h4>ng-disabled指令</h4>
+    <div data-ng-init="mySwitch=true">
+        <p>
+            <button data-ng-disabled="mySwitch">点我！</button>
+        </p>
+        <p>
+            <input type="checkbox" data-ng-model="mySwitch"/>
+            <span>按钮</span>
+        </p>
+        <p>{{mySwitch}}</p>
+    </div>
+
+    <h4>ng-show指令</h4>
+    <p data-ng-show="true">显示否1？</p>
+    <p data-ng-show="false">显示否2?</p>
+
+    <h4>ng-hide指令</h4>
+    <p data-ng-hide="true">显示否1？</p>
+    <p data-ng-hide="false">显示否2?</p>
+
+</div>
+
+</body>
+</html>
