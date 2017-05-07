@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>animation</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+    <script src="angular-animate.min.js"></script>
+</head>
+<body>
+
+<div data-ng-app="myApp">
+    <p><span>隐藏DIV：</span><input type="checkbox" data-ng-model="myCheck"/></p>
+    <div data-ng-hide="myCheck" class="div"></div>
+</div>
+<style>
+    .div {
+        transition: all 0.5s;
+        background: #eeeeee;
+        width: 500px;
+        height: 100px;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .ng-hide {
+        width: 0;
+        height: 0;
+        background: transparent;
+        top: -200px;
+        left: 200px;
+    }
+</style>
+<script>
+    var app = angular.module('myApp', ['ngAnimate']);
+</script>
+
+<p>AngularJS 添加/移除 class 的指令:ng-show | ng-hide | ng-class | ng-view | ng-include | ng-repeat | ng-if | ng-switch</p>
+<p>ng-show 和 ng-hide 指令用于添加或移除 ng-hide class 的值。</p>
+<p>其他指令会在进入 DOM 会添加 ng-enter 类，移除 DOM 会添加 ng-leave 属性。</p>
+<p>当 HTML 元素位置改变时，ng-repeat 指令同样可以添加 ng-move 类 。</p>
+<p>此外， 在动画完成后，HTML 元素的类集合将被移除。例如： ng-hide 指令会添加一下类：</p>
+<p>ng-animate</p>
+<p>ng-hide-animate</p>
+<p>ng-hide-add (如果元素将被隐藏)</p>
+<p>ng-hide-remove (如果元素将显示)</p>
+<p>ng-hide-add-active (如果元素将隐藏)</p>
+<p>ng-hide-remove-active (如果元素将显示)</p>
+
+</body>
+</html>
