@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>服务</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <div data-ng-controller="serviceCtrl1">{{myUrl}}</div>
+    <script>
+        app.controller('serviceCtrl1', function ($scope, $location) {
+            $scope.myUrl = $location.absUrl();
+        });
+    </script>
+
+    <h4>为什么要使用angular服务</h4>
+    <p>咱们可以使用DOM中的window.location服务，但其在angular应用中有一定的局限性。</p>
+    <p>在很多服务中，比如$location服务，angular会一直监控应用，处理事件变化。</p>
+
+    <h4>$http服务</h4>
+    <p>服务向服务器发送请求，应用响应服务器传过来的数据。</p>
+    <div data-ng-controller="myCtrl1">
+        {{myWelcome}}
+    </div>
+    <script>
+        app.controller('myCtrl1', function ($scope, $http) {
+            $http.get('08_welcome.html').then(function (response) {
+                $scope.myWelcome = response.data;
+            })
+        })
+    </script>
+
+    <h4>$timeout服务</h4>
+    <div data-ng-controller="myCtrl2">
+        <p>两秒后执行：{{myHeader}}</p>
+    </div>
+    <script>
+        app.controller('myCtrl2', function ($scope, $timeout) {
+            $scope.myHeader = 'hello world';
+            $timeout(function () {
+                $scope.myHeader = 'How are you today?';
+            }, 2000);
+        });
+    </script>
+
+    <h4>$interval</h4>
+    <div data-ng-controller="myCtrl3">
+        <p>{{theTime}}</p>
+    </div>
+    <script>
+        app.controller('myCtrl3', function ($scope, $interval) {
+            $scope.theTime = new Date().toLocaleString();
+            $interval(function () {
+                $scope.theTime = new Date().toLocaleString();
+            }, 1000);
+        });
+    </script>
+
+    <h4>创建自定义服务</h4>
+    <div data-ng-controller="myCtrl4">
+        <input type="number" data-ng-model="num1"/>转成16进制是：<b>{{hex}}</b>
+    </div>
+    <script>
+        app.service('hexafy', function () {
+            this.myFunc = function (x) {
+                return x.toString(16);
+            }
+        });
+        app.controller('myCtrl4', function ($scope, hexafy) {
+            $scope.num1 = 566;
+            $scope.hex = hexafy.myFunc($scope.num1);
+        });
+    </script>
+    <p>没有实时改变，估计是需要后面的知识。</p>
+
+    <h4>过滤器中使用服务</h4>
+    <div>44(10) => {{44 | myFormat}}(16)</div>
+    <script>
+        app.filter('myFormat', ['hexafy', function (hexafy) {
+            return function (x) {
+                return hexafy.myFunc(x);
+            };
+        }]);
+        app.service('hexafy', function () {
+            this.myFunc = function (x) {
+                return x.toString(16);
+            }
+        });
+    </script>
+
+
+</div>
+
+
+</body>
+</html>
