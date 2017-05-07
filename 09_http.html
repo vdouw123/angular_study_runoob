@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>$http</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<script>
+    var app = angular.module('myApp', []);
+</script>
+<div data-ng-app="myApp">
+    <p>$http用来读取远程服务器的数据。</p>
+    <p>跨域问题的解决方案 : http://www.runoob.com/w3cnote/php-ajax-cross-border.html</p>
+    <div data-ng-controller="myCtrl1">
+        <ul>
+            <li data-ng-repeat="x in names">{{x.Name + " | " + x.Country}}</li>
+        </ul>
+    </div>
+    <script>
+        app.controller('myCtrl1', function ($scope, $http) {
+            $http.get('09_data.php').then(function (response) {
+                $scope.names = response.data.sites;
+            });
+        });
+    </script>
+
+    <div data-ng-controller="myCtrl2">$http get的基本写法</div>
+    <script>
+        app.controller('myCtrl2', function ($scope, $http) {
+            $http({
+                method: 'GET',
+                url: '09_data.php'
+            }).then(function successCallback(response) {
+                console.log('请求成功的操作');
+            }, function errorCallback(response) {
+                console.log('请求失败的操作');
+            })
+        });
+    </script>
+
+    <div data-ng-controller="myCtrl3">$http post的基本写法</div>
+    <script>
+        app.controller('myCtrl3', function ($scope, $http) {
+            $http({
+                method: 'POST',
+                url: '09_data.php'
+            }).then(function successCallback(response) {
+                console.log('请求成功的操作');
+            }, function errorCallback(response) {
+                console.log('请求失败的操作');
+            })
+        });
+    </script>
+
+    <h4>简写方法</h4>
+    <p>$http.get('/someUrl', config).then(successCallback, errorCallback);</p>
+    <p>$http.post('/someUrl', data, config).then(successCallback, errorCallback);</p>
+</div>
+
+
+</body>
+</html>
